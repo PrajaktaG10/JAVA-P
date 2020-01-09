@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="suite1">
+  <test name="Test1">
+    <classes>
+        <class name="testNG.EchotrakLogin"></class>
+        
+    
+    </classes>
+  
+  </test>
+    <test name="t2">
+      <classes>
+        <class name="testNG.MultiTest"></class>
+      
+      </classes>
+    
+    </test>
+
+</suite>

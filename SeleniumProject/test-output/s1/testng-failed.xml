@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [s1]">
+  <test name="t1(failed)">
+    <groups>
+      <run>
+        <include name="left"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="testNG.MultiTest">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="visitAbout"/>
+          <include name="beforeTest"/>
+          <include name="afterMethod"/>
+          <include name="afterTest"/>
+        </methods>
+      </class> <!-- testNG.MultiTest -->
+    </classes>
+  </test> <!-- t1(failed) -->
+</suite> <!-- Failed suite [s1] -->

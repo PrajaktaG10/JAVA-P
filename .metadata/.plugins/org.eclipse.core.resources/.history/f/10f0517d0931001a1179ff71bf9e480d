@@ -1,0 +1,88 @@
+package assignment;
+
+import org.testng.annotations.Test;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.List;
+import java.util.Properties;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterTest;
+
+public class EbayKeywordDrivenAsg {
+	WebDriver driver;
+	Properties p;
+	File file;
+	FileInputStream fis;
+  @Test
+  public void f() throws Exception {
+	  driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	  driver.findElement(By.id(p.getProperty("adv_search"))).click();
+	  driver.findElement(By.id(p.getProperty("keyword_field"))).sendKeys(p.getProperty("keyword"));
+	  driver.findElement(By.id(p.getProperty("exclude_word"))).sendKeys(p.getProperty("exclude"));
+	  WebElement catgry=driver.findElement(By.xpath("//select[@id='e1-1']"));
+	  Select category=new Select(catgry);
+	  category.selectByVisibleText(p.getProperty("select_category"));
+      List<WebElement> li=driver.findElements(By.xpath("/html[1]/body[1]/div[3]/div[4]/div[1]/div[1]/div[1]/div[1]/form[1]/fieldset[2]/label/input[1]"));
+      for(WebElement w:li) {
+    	  if(w.isEnabled()) {
+    		  w.click();
+    	  }
+      }
+      driver.findElement(By.id("_mPrRngCbx")).click();
+      driver.findElement(By.name(p.getProperty("price_from"))).sendKeys(p.getProperty("minprice"));
+      driver.findElement(By.name(p.getProperty("to_price"))).sendKeys(p.getProperty("maxprice"));
+      driver.findElement(By.cssSelector("body")).sendKeys(Keys.PAGE_DOWN);
+      driver.findElement(By.xpath(p.getProperty("buying_format"))).click();
+      driver.findElement(By.id(p.getProperty("condition"))).click();
+      driver.findElement(By.id(p.getProperty("listings"))).click();
+     WebElement selectwithin=driver.findElement(By.xpath("/html[1]/body[1]/div[3]/div[4]/div[1]/div[1]/div[1]/div[1]/form[1]/fieldset[6]/div[1]/select[1]"));
+     Select selwith= new Select(selectwithin);
+     selwith.selectByVisibleText(p.getProperty("selwithin"));
+     driver.findElement(By.id(p.getProperty("items_listed"))).click();
+     driver.findElement(By.id(p.getProperty("sale_items"))).click();
+     driver.findElement(By.id(p.getProperty("best_offer"))).click();
+     driver.findElement(By.id(p.getProperty("ebayfor_charity"))).click();
+     driver.findElement(By.id(p.getProperty("shipping_options"))).click();
+     driver.findElement(By.id(p.getProperty("locrbtn"))).click();
+     WebElement locin=driver.findElement(By.id(p.getProperty("located_in_id")));
+	  Select locatedin=new Select(locin);
+	  locatedin.selectByVisibleText(p.getProperty("located_in"));
+	  driver.findElement(By.id(p.getProperty("sellers"))).click();
+	  WebElement respp=driver.findElement(By.id(p.getProperty("results_per_page_id")));
+	  Select resultperpg=new Select(respp);
+	  resultperpg.selectByVisibleText(p.getProperty("results_per_page"));
+	  driver.findElement(By.id(p.getProperty("search"))).submit();
+     Thread.sleep(5000);
+     
+  }
+
+  @BeforeTest
+  public void beforeTest() throws Exception {
+	  file=new File("F:\\JAVA P\\SeleniumProject\\src\\Ebay.properties");
+	  fis= new FileInputStream(file);
+	  p=new Properties();
+	  p.load(fis);
+	  System.setProperty("webdriver.chrome.driver", "F:\\Selenium\\chromedriver.exe");
+	  driver= new ChromeDriver();
+	  driver.get(p.getProperty("url"));
+	  driver.manage().window().maximize();
+  }
+
+  @AfterTest
+  public void afterTest() {
+	  driver.close();
+  }
+
+}

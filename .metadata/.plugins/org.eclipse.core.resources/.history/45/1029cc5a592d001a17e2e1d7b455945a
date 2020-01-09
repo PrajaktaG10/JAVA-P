@@ -1,0 +1,49 @@
+package pomTests;
+
+import org.testng.annotations.Test;
+
+import assignment.RediffPOM;
+
+import org.testng.annotations.BeforeTest;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterTest;
+
+public class RediffPOMTest {
+	WebDriver driver;
+	RediffPOM rpom;
+  @Test
+  public void fillDetails() throws InterruptedException {
+	  driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	  rpom.setname("Prajakta");
+	  rpom.setuserName("gothepraj");
+	  rpom.setpassword("123456");
+	  rpom.setretype_Password("123456");
+	  rpom.setemail("gotheprajakta@gmail.com");
+	  rpom.setmobile("15487899");
+	  Thread.sleep(2000);
+	  rpom.setday("10");
+	  rpom.setmonth("DEC");
+	  rpom.setyear("1993");
+	  rpom.setgender("f");
+	  
+	  rpom.clickOnregister();
+  }
+  @BeforeTest
+  public void beforeTest() {
+	  System.setProperty("webdriver.chrome.driver", "F:\\Selenium\\chromedriver.exe");
+	  driver = new ChromeDriver();
+	  driver.get("https://register.rediff.com/register/register.php?FormName=user_details");
+	  rpom=new RediffPOM(driver);
+	  
+  }
+
+  @AfterTest
+  public void afterTest() {
+	  driver.close();
+  }
+
+}

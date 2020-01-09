@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+ <suite name="s2">
+     <parameter name="un" value="Prajakta"></parameter>
+     <parameter name="pwd" value="prajakta"></parameter>
+    <test name="t1">
+      <classes>
+         <class name="testNG.EchotrakLogin2"></class>
+      </classes>
+      </test>
+</suite>
